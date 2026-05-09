@@ -1,0 +1,146 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { services } from '../data/services';
+import { site } from '../data/site';
+
+// Each service block gets a full saturated section.
+// Cards inside switch to cream so the content reads on the colored bg.
+const serviceTheme = {
+  'content-creation':         { bg: 'bg-teal',    text: 'text-cream',      eyebrow: 'text-mustard', accent: 'is-mustard-soft', dots: 'bg-mustard',   bullet: 'bg-mustard' },
+  'social-media-management':  { bg: 'bg-forest',  text: 'text-cream',      eyebrow: 'text-mustard', accent: 'is-mustard-soft', dots: 'bg-rose-soft', bullet: 'bg-mustard' },
+  'photography':              { bg: 'bg-mustard', text: 'text-cocoa',      eyebrow: 'text-rose',    accent: 'is-rose',         dots: 'bg-rose',      bullet: 'bg-rose' },
+};
+
+const process = [
+  { step: 'one',   title: 'Say hi',          body: '[EDIT: We hop on a 20-min discovery call so I can hear about your brand and goals.]' },
+  { step: 'two',   title: 'Custom proposal', body: '[EDIT: I send back a tailored proposal with deliverables, timeline, and pricing.]' },
+  { step: 'three', title: 'The fun part',    body: '[EDIT: Shoot day, content drops, or your social calendar going live — depending on the package.]' },
+  { step: 'four',  title: 'Wrap up',         body: '[EDIT: You get the final files, a usage guide, and an invite to keep working together.]' },
+];
+
+const faqs = [
+  { q: 'Do you travel for shoots?', a: 'Yes — based in Greenville, SC, available worldwide. [EDIT: Travel fees apply outside the Carolinas / Southeast.]' },
+  { q: 'How long until I get my content?', a: '[EDIT: Most deliverables go out within 2–3 weeks of shoot day.]' },
+  { q: 'Do you offer retainers?', a: '[EDIT: Yep — monthly retainers for ongoing content & social management. Reach out for details.]' },
+  { q: 'Can I see a sample contract?', a: '[EDIT: Of course — I send one over after our discovery call.]' },
+];
+---
+
+<BaseLayout title={`Services — ${site.name}`}>
+  <!-- Hero (rose) -->
+  <section class="bg-rose text-cream border-b border-cocoa/20 relative overflow-hidden" data-animate>
+    <span aria-hidden="true" class="absolute top-20 right-[10%] text-mustard text-4xl animate-spin-slow inline-block">✦</span>
+    <span aria-hidden="true" class="absolute bottom-12 left-[8%] text-cream text-3xl animate-float">✦</span>
+    <span aria-hidden="true" class="absolute top-1/2 right-[4%] text-cream-deep text-2xl animate-spin-reverse inline-block">✺</span>
+    <span aria-hidden="true" class="absolute top-12 left-[40%] w-2 h-2 rounded-full bg-cream animate-float-slow"></span>
+    <span aria-hidden="true" class="absolute bottom-16 right-[30%] w-3 h-3 rounded-full bg-mustard animate-float"></span>
+
+    <div class="max-w-6xl mx-auto px-6 sm:px-10 pt-20 pb-16 md:pt-28 md:pb-20 text-center relative">
+      <p class="eyebrow text-mustard mb-4">Services &amp; Packages</p>
+      <h1 class="font-display font-bold text-6xl sm:text-7xl md:text-8xl text-cream leading-[0.95] max-w-3xl mx-auto tracking-tight">
+        <span class="word-reveal inline-block" style="animation-delay: 100ms">Pick your</span>
+        <span class="word-reveal inline-block italic font-medium" style="animation-delay: 240ms">flavor.</span>
+      </h1>
+      <p class="prose-warm text-cream-deep/90 text-xl max-w-2xl mx-auto mt-8 word-reveal" style="animation-delay: 480ms">
+        [EDIT: One or two sentences framing how you work. Custom packages welcome — these are starting points.]
+      </p>
+    </div>
+  </section>
+
+  <!-- Service blocks: each one full-bleed saturated -->
+  {services.map((service, i) => {
+    const theme = serviceTheme[service.slug as keyof typeof serviceTheme] ?? serviceTheme['content-creation'];
+    return (
+      <section
+        id={service.slug}
+        class:list={['section relative overflow-hidden', theme.bg, theme.text]}
+        data-animate
+      >
+        <span aria-hidden="true" class:list={['absolute top-12 right-[8%] text-3xl animate-spin-slow inline-block', `${theme.dots.replace('bg-', 'text-')}`]}>✦</span>
+        <span aria-hidden="true" class="absolute bottom-20 left-[6%] text-current opacity-30 text-2xl animate-float">✺</span>
+
+        <div class="container-wide grid md:grid-cols-12 gap-10 relative">
+          <div class="md:col-span-5">
+            <p class:list={['eyebrow mb-3', theme.eyebrow]}>0{i + 1}</p>
+            <h2 class:list={['font-display font-semibold text-5xl md:text-6xl lg:text-7xl leading-[1.05] mb-4', theme.text]}>
+              {service.title}
+            </h2>
+            <p class="font-display text-xl mb-6 opacity-90">{service.startingAt}</p>
+          </div>
+          <div class="md:col-span-7 bg-cream text-cocoa rounded-2xl p-7 md:p-9 border border-cream-deep">
+            <p class="prose-warm text-base mb-6">{service.long}</p>
+            <p class="text-xs uppercase tracking-widest text-rose font-semibold mb-3">What's included</p>
+            <ul class="grid sm:grid-cols-2 gap-2 mb-8">
+              {service.bullets.map((bullet) => (
+                <li class="flex items-start gap-3 text-cocoa">
+                  <span class:list={['mt-1.5 w-1.5 h-1.5 rounded-full shrink-0', theme.bullet]}></span>
+                  <span>{bullet}</span>
+                </li>
+              ))}
+            </ul>
+            <a href="/contact" class="arrow-link inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-cocoa text-cream text-base font-medium hover:bg-rose active:scale-[0.97] transition-all duration-200">
+              Inquire about {service.title.toLowerCase()}
+              <svg class="w-4 h-4 arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </section>
+    );
+  })}
+
+  <!-- Process (cream) -->
+  <section class="section bg-cream relative overflow-hidden" data-animate>
+    <span aria-hidden="true" class="absolute top-12 right-[8%] text-rose text-3xl animate-spin-slow inline-block">✦</span>
+    <span aria-hidden="true" class="absolute bottom-20 left-[6%] text-teal text-2xl animate-float">✺</span>
+
+    <div class="container-wide relative">
+      <div class="text-center mb-12">
+        <p class="eyebrow !text-cobalt mb-3">How it works</p>
+        <h2 class="font-display font-semibold text-5xl md:text-6xl lg:text-7xl text-cocoa leading-[1.05]">
+          From <span class="marker is-cobalt">hello</span> to handoff.
+        </h2>
+      </div>
+      <div class="grid md:grid-cols-4 gap-5" data-stagger>
+        {process.map((item, i) => (
+          <div class="bg-cream-deep/30 rounded-2xl p-7 border border-cream-deep relative">
+            <span class="absolute -top-4 left-7 bg-rose text-cream rounded-full w-9 h-9 flex items-center justify-center text-sm font-display font-semibold">
+              {i + 1}
+            </span>
+            <p class="font-script text-rose text-2xl mb-1 mt-2">step {item.step}</p>
+            <h3 class="font-display text-xl text-cocoa mb-3 font-semibold">{item.title}</h3>
+            <p class="prose-warm text-sm">{item.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ (lavender) -->
+  <section id="faq" class="section bg-lavender text-cocoa relative overflow-hidden" data-animate>
+    <span aria-hidden="true" class="absolute top-10 right-[5%] text-cream text-3xl animate-spin-reverse inline-block">✺</span>
+    <span aria-hidden="true" class="absolute bottom-16 left-[8%] text-forest text-2xl animate-float">✦</span>
+    <span aria-hidden="true" class="absolute top-28 left-[40%] w-3 h-3 rounded-full bg-cream animate-float-slow"></span>
+
+    <div class="container-tight relative">
+      <div class="text-center mb-12">
+        <p class="eyebrow !text-forest mb-3">FAQ</p>
+        <h2 class="font-display font-semibold text-5xl md:text-6xl lg:text-7xl text-cocoa leading-[1.05]">
+          Good <span class="marker is-forest">questions</span>.
+        </h2>
+      </div>
+      <div class="space-y-3 bg-cream rounded-2xl border border-cream-deep p-2" data-stagger>
+        {faqs.map((faq) => (
+          <details class="group rounded-xl px-4 open:bg-cream-deep/30">
+            <summary class="cursor-pointer list-none px-3 py-5 flex items-center justify-between gap-6 font-display text-lg text-cocoa font-semibold">
+              {faq.q}
+              <span class="text-rose text-2xl group-open:rotate-45 transition-transform">+</span>
+            </summary>
+            <div class="px-3 pb-5 prose-warm">{faq.a}</div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

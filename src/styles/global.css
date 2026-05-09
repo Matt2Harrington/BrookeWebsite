@@ -1,0 +1,267 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-cream text-cocoa;
+    font-family: 'IBM Plex Sans', system-ui, sans-serif;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 500;
+    letter-spacing: -0.015em;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-rose;
+  }
+
+  ::selection {
+    @apply bg-rose-soft text-cocoa;
+  }
+}
+
+@layer components {
+  /* Accent word — bold colored text. No underline, no background.
+     The contrast comes from color saturation + font weight. */
+  .marker {
+    display: inline;
+    color: #E62E55;
+    font-weight: 600;
+  }
+
+  .marker-rose {
+    display: inline;
+    color: #FAC4D0;
+    font-weight: 600;
+  }
+
+  /* Color variants */
+  .marker.is-teal     { color: #2EA9A0; }
+  .marker.is-mustard  { color: #E8B71E; }
+  .marker.is-forest   { color: #3F6B43; }
+  .marker.is-coral    { color: #FF7E6B; }
+  .marker.is-lavender { color: #B89BD9; }
+  .marker.is-magenta  { color: #E91E89; }
+  .marker.is-cobalt   { color: #2B5BA3; }
+  .marker.is-cream    { color: #F4E4C2; }
+  .marker.is-mustard-soft { color: #F5DF8A; }
+
+  /* Tiny corner sticker badge — used sparingly */
+  .badge {
+    display: inline-block;
+    font-family: 'Waiting for the Sunrise', cursive;
+    font-size: 1.1rem;
+    line-height: 1;
+    padding: 0.5rem 1rem;
+    border: 2px solid #1A1A1A;
+    border-radius: 9999px;
+    box-shadow: 3px 3px 0 0 #1A1A1A;
+    animation: sticker-bob 4s ease-in-out infinite;
+    transform-origin: center;
+  }
+  .badge:hover { animation-play-state: paused; }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full bg-cocoa text-cream text-base font-medium tracking-wide hover:bg-rose transition-all duration-200 hover:scale-[1.04] active:scale-[0.97];
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full border-2 border-cocoa text-cocoa text-base font-medium tracking-wide hover:bg-cocoa hover:text-cream transition-all duration-200 hover:scale-[1.04] active:scale-[0.97];
+  }
+
+  .eyebrow {
+    @apply text-sm uppercase tracking-[0.2em] text-rose font-semibold;
+  }
+
+  .section {
+    @apply px-6 sm:px-10 py-16 md:py-20;
+  }
+
+  .container-tight {
+    @apply max-w-5xl mx-auto;
+  }
+
+  .container-wide {
+    @apply max-w-6xl mx-auto;
+  }
+
+  .prose-warm {
+    @apply text-cocoa-soft leading-relaxed;
+  }
+  .prose-warm p {
+    @apply mb-4;
+  }
+  .prose-warm a {
+    @apply text-rose underline-offset-4 hover:underline;
+  }
+
+  /* Animated nav underline */
+  .nav-underline {
+    @apply relative;
+  }
+  .nav-underline::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -4px;
+    height: 2px;
+    background-color: currentColor;
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.3s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+  .nav-underline:hover::after,
+  .nav-underline.is-current::after {
+    transform: scaleX(1);
+  }
+
+  /* Bouncing arrow on hover */
+  .arrow-link svg.arrow,
+  .arrow-link .arrow {
+    transition: transform 0.3s ease;
+  }
+  .arrow-link:hover svg.arrow,
+  .arrow-link:hover .arrow {
+    animation: bounce-x 0.7s ease-in-out infinite;
+  }
+
+  /* Sticker bob — used on tilted pill stickers */
+  .sticker {
+    display: inline-block;
+    animation: sticker-bob 4s ease-in-out infinite;
+    transform-origin: center;
+  }
+  .sticker:hover {
+    animation-play-state: paused;
+  }
+}
+
+@layer utilities {
+  .animate-in {
+    animation: fadeSlideUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: var(--stagger-delay, 0ms);
+  }
+
+  .animate-marquee {
+    animation: marquee 38s linear infinite;
+  }
+
+  .animate-marquee-reverse {
+    animation: marquee-reverse 34s linear infinite;
+  }
+
+  .animate-float {
+    animation: float 5s ease-in-out infinite;
+  }
+
+  .animate-float-slow {
+    animation: float 8s ease-in-out infinite;
+  }
+
+  .animate-spin-slow {
+    animation: spin 18s linear infinite;
+  }
+
+  .animate-spin-reverse {
+    animation: spin-reverse 22s linear infinite;
+  }
+
+  .animate-wiggle {
+    animation: wiggle 4s ease-in-out infinite;
+  }
+
+  .word-reveal {
+    display: inline-block;
+    opacity: 0;
+    animation: wordReveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  .draw-line path {
+    stroke-dasharray: 200;
+    stroke-dashoffset: 200;
+    animation: draw-line 2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: 0.6s;
+  }
+}
+
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes marquee-reverse {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes spin-reverse {
+  to { transform: rotate(-360deg); }
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-2deg); }
+  75% { transform: rotate(2deg); }
+}
+
+@keyframes wordReveal {
+  from {
+    opacity: 0;
+    transform: translateY(24px) rotate(-3deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotate(0);
+  }
+}
+
+@keyframes bounce-x {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(4px); }
+}
+
+@keyframes sticker-bob {
+  0%, 100% { transform: rotate(var(--bob-rot, -6deg)) translateY(0); }
+  50% { transform: rotate(calc(var(--bob-rot, -6deg) * 0.4)) translateY(-4px); }
+}
+
+@keyframes draw-line {
+  to { stroke-dashoffset: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
