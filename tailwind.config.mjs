@@ -28,6 +28,7 @@ export default {
         'navy-soft': '#7B97C0',
         forest: '#3F6B43',
         'forest-soft': '#A8C4A8',
+        hunter: '#346210',
         cobalt: '#2B5BA3',
         magenta: '#E91E89',
         coral: '#FF7E6B',

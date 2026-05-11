@@ -19,26 +19,28 @@ const currentPath = Astro.url.pathname;
     class="max-w-6xl mx-auto px-6 sm:px-10 h-16 flex items-center justify-between transition-[height] duration-300"
     aria-label="Main navigation"
   >
-    <a href="/" class="group inline-flex items-baseline gap-2 text-cream hover:text-cream transition-colors" aria-label="Home">
-      <span class="font-display text-lg tracking-tight whitespace-nowrap">{site.name}</span>
-      <span aria-hidden="true" class="text-mustard text-base inline-block group-hover:animate-spin-slow shrink-0">✦</span>
-    </a>
+    <div class="flex items-center gap-8">
+      <a href="/" class="group inline-flex items-baseline gap-2 text-cream hover:text-cream transition-colors" aria-label="Home">
+        <span class="font-display text-lg tracking-tight whitespace-nowrap">{site.name}</span>
+        <span aria-hidden="true" class="text-mustard text-base inline-block group-hover:animate-spin-slow shrink-0">✦</span>
+      </a>
 
-    <div class="hidden md:flex items-center gap-8">
-      {navLinks.map(link => (
-        <a
-          href={link.href}
-          class:list={[
-            'nav-underline text-sm tracking-wide transition-colors hover:text-cream',
-            currentPath.startsWith(link.href) ? 'text-cream is-current' : 'text-cream-deep',
-          ]}
-        >
-          {link.label}
-        </a>
-      ))}
+      <div class="hidden md:flex items-center gap-6">
+        {navLinks.map(link => (
+          <a
+            href={link.href}
+            class:list={[
+              'nav-underline text-sm tracking-wide transition-colors hover:text-cream',
+              currentPath.startsWith(link.href) ? 'text-cream is-current' : 'text-cream-deep',
+            ]}
+          >
+            {link.label}
+          </a>
+        ))}
+      </div>
     </div>
 
-    <div class="hidden md:flex items-center gap-4">
+    <div class="hidden md:flex items-center gap-5">
       <a
         href={site.instagram}
         target="_blank"
@@ -46,6 +48,14 @@ const currentPath = Astro.url.pathname;
         class="nav-underline text-xs uppercase tracking-widest text-cream-deep hover:text-cream transition-colors"
       >
         Instagram
+      </a>
+      <a
+        href={site.tiktok}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="nav-underline text-xs uppercase tracking-widest text-cream-deep hover:text-cream transition-colors"
+      >
+        TikTok
       </a>
     </div>
 

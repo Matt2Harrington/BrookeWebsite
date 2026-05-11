@@ -3,19 +3,19 @@ import { site, navLinks } from '../../data/site';
 const year = new Date().getFullYear();
 ---
 
-<footer class="bg-rose text-cream-deep mt-16 border-t border-rose">
+<footer class="bg-rose text-cream-deep border-t border-rose">
   <div class="max-w-6xl mx-auto px-6 sm:px-10 py-14 grid gap-10 md:grid-cols-12">
     <div class="md:col-span-5">
       <p class="font-display text-2xl text-cream mb-3">{site.name}</p>
       <p class="prose-warm text-cream-deep/85 max-w-sm text-sm">
         {site.tagline}. Based in {site.location}. Available for projects worldwide.
       </p>
-      <div class="mt-6 flex flex-wrap gap-3">
-        <a href="/contact" class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-cream text-cocoa text-sm font-medium hover:bg-mustard transition-colors">
-          Start a project
-        </a>
-        <a href={`mailto:${site.email}`} class="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-cream-deep/40 text-cream-deep text-sm hover:bg-cream/10 hover:text-cream transition-colors">
-          {site.email}
+      <div class="mt-6">
+        <a href="/contact" class="arrow-link inline-flex items-center gap-2 px-5 py-2 rounded-full bg-cream text-cocoa text-sm font-medium hover:bg-mustard transition-colors">
+          Work With Me
+          <svg class="w-4 h-4 arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M3 8h10M9 4l4 4-4 4" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
         </a>
       </div>
     </div>

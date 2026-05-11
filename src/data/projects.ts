@@ -7,9 +7,11 @@ export interface Project {
   long: string;
   instagram: string;
   handle: string;
-  accent: 'rose' | 'sage' | 'sand' | 'teal' | 'mustard' | 'cobalt' | 'forest' | 'cream';
+  accent: 'rose' | 'sage' | 'sand' | 'teal' | 'mustard' | 'cobalt' | 'forest' | 'hunter' | 'cream';
   /** Optional list of video files (paths under /public). Rendered as autoplay loops. */
   videos?: string[];
+  logo?: string;
+  logoRounded?: boolean;
 }
 
 export const projects: Project[] = [
@@ -23,6 +25,7 @@ export const projects: Project[] = [
     instagram: 'https://instagram.com/harringtonandhobbs',
     handle: '@harringtonandhobbs',
     accent: 'cream',
+    logo: '/images/logos/H&HLogoBcrop.png',
   },
   {
     slug: 'the-kava-konnection',
@@ -33,7 +36,8 @@ export const projects: Project[] = [
     long: 'Led and directed social media accounts by creating Instagram Reels and TikToks, taking professional photos, managing marketing events, and making flyers in Canva. Collaborated with the management team to develop content strategies that increased engagement and brand awareness, using analytics to track performance metrics, audience insights, and optimize content strategy for maximum reach and impact.',
     instagram: 'https://instagram.com/the_kava_konnection',
     handle: '@the_kava_konnection',
-    accent: 'forest',
+    accent: 'hunter',
+    logo: '/images/logos/Kava_logo.png',
     videos: [
       '/videos/kava/1000014761.mp4',
       '/videos/kava/3a91c50c174f4eaba8848f88c1dc81fb.mp4',
@@ -53,8 +57,12 @@ export const projects: Project[] = [
     instagram: 'https://instagram.com/gvltrinkettrade',
     handle: '@gvltrinkettrade',
     accent: 'rose',
+    logo: '/images/logos/trinket.png',
+    logoRounded: true,
     videos: [
-      '/videos/trinket/a8456cf7f12e4484bdeef4364f014feb.mp4',
+      '/videos/trinket/a8456cf7f12e4484bdeef4364f014feb.mov',
+      '/videos/trinket/13b87ca350ba4b9a87fba76209412b83.MOV',
+      '/videos/trinket/f46d9c84355448018ee92db5563268af.MOV',
     ],
   },
 ];

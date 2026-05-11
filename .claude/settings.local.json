@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "WebFetch(domain:breannaregis.my.canva.site)"
+      "WebFetch(domain:breannaregis.my.canva.site)",
+      "Bash(npm -v)"
     ]
   }
 }

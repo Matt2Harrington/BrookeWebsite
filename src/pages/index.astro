@@ -11,4 +11,18 @@ import PortfolioContent from '../components/portfolio/PortfolioContent.astro';
   <AboutMe />
   <Toolbox />
   <PortfolioContent showHero={false} compactVideos={true} />
+
+  <section class="bg-rose py-16 md:py-20 border-t border-cocoa/10">
+    <div class="container-wide text-center">
+      <a
+        href="/experience"
+        class="arrow-link inline-flex items-center justify-center gap-3 px-9 py-4 rounded-full bg-cream text-cocoa text-base font-medium tracking-wide hover:bg-cream-deep active:scale-[0.97] transition-all duration-200"
+      >
+        See Experience
+        <svg class="w-4 h-4 arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M3 8h10M9 4l4 4-4 4" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </a>
+    </div>
+  </section>
 </BaseLayout>

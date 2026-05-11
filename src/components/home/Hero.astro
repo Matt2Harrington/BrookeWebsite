@@ -14,14 +14,9 @@ import { site } from '../../data/site';
 
   <div class="max-w-6xl mx-auto px-6 sm:px-10 pt-16 pb-14 md:pt-24 md:pb-20 grid md:grid-cols-12 gap-10 items-center relative">
     <div class="md:col-span-7 md:order-1 order-2 min-w-0">
-      <a href="/contact" class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cream/20 text-cream text-xs uppercase tracking-widest mb-6 border border-cream/30 hover:bg-cream/30 transition-colors">
-        <span class="w-1.5 h-1.5 rounded-full bg-cream animate-pulse"></span>
-        Contact Me :)
-      </a>
-
       <h1 class="text-6xl sm:text-7xl md:text-8xl lg:text-[7.5rem] text-cream leading-[0.95] mb-6 tracking-tight">
         <span class="word-reveal inline-block" style="animation-delay: 100ms">
-          <span class="font-display font-bold">Brookelyn.</span>
+          <span class="font-display font-bold">Brookelyn McPherson</span>
         </span>
       </h1>
 
@@ -29,7 +24,7 @@ import { site } from '../../data/site';
         Social Media Managing · Content Creation · Photographer
       </p>
 
-      <div class="flex flex-wrap items-center gap-x-6 gap-y-2 mb-10 text-sm word-reveal" style="animation-delay: 600ms">
+      <div class="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm word-reveal" style="animation-delay: 600ms">
         <a href={`mailto:${site.email}`} class="text-cream-deep hover:text-mustard transition-colors arrow-link inline-flex items-center gap-1.5">
           <svg class="w-4 h-4" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2.5 5h15v10h-15z" stroke-linejoin="round" /><path d="M2.5 6l7.5 5 7.5-5" stroke-linecap="round" stroke-linejoin="round" /></svg>
           {site.email}
@@ -43,34 +38,18 @@ import { site } from '../../data/site';
           {site.tiktokHandle}
         </a>
       </div>
-
-      <div class="flex flex-wrap items-center gap-5 word-reveal" style="animation-delay: 720ms">
-        <a href="/portfolio" class="arrow-link inline-flex items-center justify-center gap-3 px-9 py-4 rounded-full border-2 border-cream/50 text-cream text-base font-medium tracking-wide hover:bg-cream/10 hover:border-cream active:scale-[0.97] transition-all duration-200">
-          See recent work
-          <svg class="w-4 h-4 arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
-            <path d="M3 8h10M9 4l4 4-4 4" stroke-linecap="round" stroke-linejoin="round" />
-          </svg>
-        </a>
-      </div>
     </div>
 
     <div class="md:col-span-5 md:order-2 order-1">
       <div class="relative group max-w-sm mx-auto md:max-w-none">
-        <!-- Polaroid frame -->
-        <div class="bg-cream border border-cocoa-soft/15 rotate-1 shadow-xl p-3 pb-12 transition-transform duration-500 ease-out group-hover:rotate-0 group-hover:scale-[1.02]">
+        <div class="bg-cream border border-cocoa-soft/15 rotate-1 shadow-xl p-3 pb-3 transition-transform duration-500 ease-out group-hover:rotate-0 group-hover:scale-[1.02]">
           <div class="aspect-[4/5] overflow-hidden bg-sand/60">
             <img
-              src="/images/brooke.jpg"
+              src="/images/brooke2.jpeg"
               alt="Brookelyn McPherson"
               class="w-full h-full object-cover"
             />
           </div>
-          <p class="absolute bottom-3 left-0 right-0 text-center font-script text-cocoa text-2xl">brookelyn ✿</p>
-        </div>
-
-        <span aria-hidden="true" class="absolute -top-6 -right-4 text-mustard text-3xl animate-spin-slow inline-block">✦</span>
-        <div aria-hidden="true" class="absolute -top-4 -left-6 z-20 badge bg-mustard text-cocoa" style="--bob-rot: -10deg">
-          hi!
         </div>
       </div>
     </div>

@@ -20,9 +20,12 @@ export const galleries: Gallery[] = [
   {
     slug: 'harrington-and-hobbs',
     photos: [
-      // Drop photos into /public/images/portfolio/harrington-and-hobbs/ and list them here.
-      // Example:
-      // { src: '/images/portfolio/harrington-and-hobbs/01.jpg', aspect: 'tall' },
+      { src: '/images/photography/1R1A7496.JPEG', aspect: 'tall' },
+      { src: '/images/photography/1R1A9762.JPEG', aspect: 'tall' },
+      { src: '/images/photography/IMG_6302.JPG', aspect: 'tall' },
+      { src: '/images/photography/1000003246.JPG', aspect: 'tall' },
+      { src: '/images/photography/1000003326.JPG', aspect: 'tall' },
+      { src: '/images/photography/1000011086.JPG', aspect: 'tall' },
     ],
   },
   {
