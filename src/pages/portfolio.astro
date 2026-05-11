@@ -17,12 +17,13 @@ const projectTheme = {
   sage:    { bg: 'bg-sage',    text: 'text-cocoa',      eyebrow: 'text-rose',        accent: 'is-rose',          emptyText: 'text-cocoa-soft' },
   sand:    { bg: 'bg-sand',    text: 'text-cocoa',      eyebrow: 'text-rose',        accent: 'is-rose',          emptyText: 'text-cocoa-soft' },
   cobalt:  { bg: 'bg-cobalt',  text: 'text-cream',      eyebrow: 'text-mustard',     accent: 'is-mustard-soft',  emptyText: 'text-cream-deep/85' },
+  cream:   { bg: 'bg-cream',   text: 'text-cocoa',      eyebrow: 'text-rose',        accent: 'is-rose',          emptyText: 'text-cocoa-soft' },
 };
 ---
 
 <BaseLayout title={`Portfolio — ${site.name}`}>
-  <!-- Hero (rose) -->
-  <section class="bg-rose text-cream border-b border-cocoa/20 relative overflow-hidden" data-animate>
+  <!-- Hero (cobalt blue) -->
+  <section class="bg-cobalt text-cream border-b border-cocoa/20 relative overflow-hidden" data-animate>
     <span aria-hidden="true" class="absolute top-20 right-[10%] text-mustard text-4xl animate-spin-slow inline-block">✦</span>
     <span aria-hidden="true" class="absolute bottom-12 left-[8%] text-cream text-3xl animate-float">✦</span>
     <span aria-hidden="true" class="absolute top-1/2 right-[4%] text-cream-deep text-2xl animate-spin-reverse inline-block">✺</span>
@@ -87,23 +88,30 @@ const projectTheme = {
                 </svg>
               </a>
             </div>
-            <div class="md:col-span-7 bg-cream text-cocoa rounded-2xl p-7 md:p-9 border border-cream-deep">
-              <p class="prose-warm text-base mb-6">{project.long}</p>
-              <a
-                href={project.instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="arrow-link inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-cocoa text-cream text-base font-medium hover:bg-rose active:scale-[0.97] transition-all duration-200"
-              >
-                View on Instagram
-                <svg class="w-4 h-4 arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
-                  <path d="M3 8h10M9 4l4 4-4 4" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
-              </a>
+            <div class="md:col-span-7 flex items-start">
+              <p class:list={['text-base md:text-lg leading-relaxed', theme.emptyText]}>{project.long}</p>
             </div>
           </div>
 
-          {photos.length > 0 ? (
+          {project.videos && project.videos.length > 0 ? (
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+              {project.videos.map((src) => (
+                <div class="relative aspect-[9/16] overflow-hidden rounded-xl bg-cocoa border border-cream-deep shadow-md group">
+                  <video
+                    autoplay
+                    muted
+                    loop
+                    playsinline
+                    preload="metadata"
+                    data-hover-controls
+                    class="w-full h-full object-cover"
+                  >
+                    <source src={src} type="video/mp4" />
+                  </video>
+                </div>
+              ))}
+            </div>
+          ) : photos.length > 0 ? (
             <div class="columns-2 md:columns-3 lg:columns-4 gap-4 [&>a]:mb-4">
               {photos.map((photo) => (
                 <a
@@ -176,4 +184,32 @@ const projectTheme = {
   </section>
 
   <Lightbox />
+
+  <script>
+    function initVideoHoverControls() {
+      const videos = document.querySelectorAll<HTMLVideoElement>('video[data-hover-controls]');
+      videos.forEach((video) => {
+        if ((video as any).__hoverInit) return;
+        (video as any).__hoverInit = true;
+        const container = video.parentElement;
+        if (!container) return;
+
+        // Desktop: show controls on hover, hide on leave
+        container.addEventListener('mouseenter', () => {
+          video.controls = true;
+        });
+        container.addEventListener('mouseleave', () => {
+          video.controls = false;
+        });
+
+        // Touch: tap to toggle controls (so mobile users can unmute too)
+        container.addEventListener('touchstart', () => {
+          video.controls = !video.controls;
+        }, { passive: true });
+      });
+    }
+
+    initVideoHoverControls();
+    document.addEventListener('astro:after-swap', initVideoHoverControls);
+  </script>
 </BaseLayout>
