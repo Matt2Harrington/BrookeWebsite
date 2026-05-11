@@ -1,0 +1,77 @@
+---
+import { site } from '../../data/site';
+
+const accounts = [
+  {
+    handle: site.photographyHandle,
+    url: site.photographyInstagram,
+    label: 'Photography',
+    note: 'Editorial portrait, brand, and travel work from Harrington & Hobbs.',
+    bar: 'bg-teal',
+    tilt: 'rotate-1',
+  },
+  {
+    handle: site.clientHandle,
+    url: site.clientInstagram,
+    label: 'Client work',
+    note: 'Ongoing content + social strategy for The Kava Konnection.',
+    bar: 'bg-forest',
+    tilt: '-rotate-1',
+  },
+  {
+    handle: site.personalProjectHandle,
+    url: site.personalProjectInstagram,
+    label: 'Personal project',
+    note: 'GVL Trinket Trade — built from the ground up.',
+    bar: 'bg-mustard',
+    tilt: 'rotate-1',
+  },
+];
+---
+
+<section class="section bg-cream relative overflow-hidden" data-animate>
+  <span aria-hidden="true" class="absolute top-12 right-[6%] text-coral text-3xl animate-spin-slow inline-block">✦</span>
+  <span aria-hidden="true" class="absolute bottom-20 left-[5%] text-teal text-2xl animate-float">✺</span>
+  <span aria-hidden="true" class="absolute top-1/3 left-[8%] text-lavender text-xl animate-spin-reverse inline-block">✦</span>
+  <span aria-hidden="true" class="absolute top-28 right-[40%] w-3 h-3 rounded-full bg-coral animate-float-slow"></span>
+  <span aria-hidden="true" class="absolute bottom-32 right-[15%] w-2.5 h-2.5 rounded-full bg-teal animate-float"></span>
+  <span aria-hidden="true" class="absolute bottom-12 left-[40%] w-2 h-2 rounded-full bg-mustard animate-float" style="animation-delay: 1s"></span>
+
+  <div class="container-wide relative">
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10 pb-6 border-b border-cream-deep">
+      <div>
+        <p class="eyebrow mb-3">Find me on Instagram</p>
+        <h2 class="font-display font-semibold text-5xl md:text-6xl lg:text-7xl text-cocoa leading-[1.05]">
+          Three accounts, <span class="marker is-lavender">one Brookelyn</span>
+        </h2>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-4" data-stagger>
+      {accounts.map(account => (
+        <a
+          href={account.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class:list={[
+            'group relative bg-cream-deep/30 border border-cream-deep rounded-2xl p-6 transition-transform duration-300 hover:-translate-y-1 hover:bg-cream hover:shadow-xl overflow-hidden',
+            account.tilt,
+          ]}
+        >
+          <span class:list={['absolute top-0 left-6 right-6 h-1 rounded-b-sm', account.bar]}></span>
+          <p class="text-xs uppercase tracking-widest text-cocoa-soft/70 mb-3 mt-1">{account.label}</p>
+          <p class="font-display text-xl text-cocoa group-hover:text-rose transition-colors mb-3 font-semibold">
+            {account.handle}
+          </p>
+          <p class="prose-warm text-sm">{account.note}</p>
+          <span class="mt-5 inline-flex items-center gap-2 text-xs uppercase tracking-widest text-cocoa-soft group-hover:text-rose transition-colors arrow-link">
+            View on Instagram
+            <svg class="w-3 h-3 arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M3 8h10M9 4l4 4-4 4" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </span>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

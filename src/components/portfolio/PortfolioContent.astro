@@ -1,0 +1,295 @@
+---
+import Lightbox from './Lightbox.astro';
+import { projects } from '../../data/projects';
+import { galleries } from '../../data/portfolio';
+import { site } from '../../data/site';
+
+interface Props {
+  showHero?: boolean;
+  compactVideos?: boolean;
+}
+const { showHero = true, compactVideos = false } = Astro.props;
+
+const videoGridClass = compactVideos
+  ? 'grid grid-cols-3 md:grid-cols-6 gap-3'
+  : 'grid grid-cols-2 md:grid-cols-3 gap-4';
+
+const singleVideoWidthClass = compactVideos
+  ? 'w-1/3 md:w-1/6'
+  : 'w-1/2 md:w-1/3';
+
+const galleryFor = (slug: string) =>
+  galleries.find(g => g.slug === slug)?.photos ?? [];
+
+// Each project gets a full saturated section in its accent color.
+const projectTheme = {
+  forest:  { bg: 'bg-forest',  text: 'text-cream',      eyebrow: 'text-mustard',     accent: 'is-mustard-soft',  emptyText: 'text-cream-deep/85' },
+  hunter:  { bg: 'bg-hunter',  text: 'text-cream',      eyebrow: 'text-mustard',     accent: 'is-mustard-soft',  emptyText: 'text-cream-deep/85' },
+  teal:    { bg: 'bg-teal',    text: 'text-cream',      eyebrow: 'text-mustard',     accent: 'is-mustard-soft',  emptyText: 'text-cream-deep/85' },
+  mustard: { bg: 'bg-mustard', text: 'text-cocoa',      eyebrow: 'text-rose',        accent: 'is-rose',          emptyText: 'text-cocoa-soft' },
+  rose:    { bg: 'bg-rose',    text: 'text-cream',      eyebrow: 'text-mustard',     accent: 'is-mustard-soft',  emptyText: 'text-cream-deep/85' },
+  sage:    { bg: 'bg-sage',    text: 'text-cocoa',      eyebrow: 'text-rose',        accent: 'is-rose',          emptyText: 'text-cocoa-soft' },
+  sand:    { bg: 'bg-sand',    text: 'text-cocoa',      eyebrow: 'text-rose',        accent: 'is-rose',          emptyText: 'text-cocoa-soft' },
+  cobalt:  { bg: 'bg-cobalt',  text: 'text-cream',      eyebrow: 'text-mustard',     accent: 'is-mustard-soft',  emptyText: 'text-cream-deep/85' },
+  cream:   { bg: 'bg-cream',   text: 'text-cocoa',      eyebrow: 'text-rose',        accent: 'is-rose',          emptyText: 'text-cocoa-soft' },
+};
+---
+
+{showHero && (
+  <!-- Hero (cobalt blue) -->
+  <section class="bg-cobalt text-cream border-b border-cocoa/20 relative overflow-hidden" data-animate>
+    <span aria-hidden="true" class="absolute top-20 right-[10%] text-mustard text-4xl animate-spin-slow inline-block">✦</span>
+    <span aria-hidden="true" class="absolute bottom-12 left-[8%] text-cream text-3xl animate-float">✦</span>
+    <span aria-hidden="true" class="absolute top-1/2 right-[4%] text-cream-deep text-2xl animate-spin-reverse inline-block">✺</span>
+    <span aria-hidden="true" class="absolute top-12 left-[40%] w-2 h-2 rounded-full bg-cream animate-float-slow"></span>
+    <span aria-hidden="true" class="absolute bottom-16 right-[28%] w-3 h-3 rounded-full bg-mustard animate-float"></span>
+
+    <div class="max-w-6xl mx-auto px-6 sm:px-10 pt-20 pb-16 md:pt-28 md:pb-20 grid md:grid-cols-12 gap-10 items-end relative">
+      <div class="md:col-span-8">
+        <p class="eyebrow text-mustard mb-4">Portfolio</p>
+        <h2 class="font-display font-bold text-6xl sm:text-7xl md:text-8xl text-cream leading-[0.95] tracking-tight">
+          <span class="word-reveal inline-block" style="animation-delay: 100ms">Selected</span>
+          <span class="word-reveal inline-block italic font-medium" style="animation-delay: 240ms">projects.</span>
+        </h2>
+        <p class="prose-warm text-cream-deep/90 text-xl max-w-2xl mt-6 word-reveal" style="animation-delay: 480ms">
+          Photography lives on <a
+            href={site.photographyInstagram}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="font-semibold underline-offset-4 hover:underline"
+          >{site.photographyHandle}</a>. Below: the projects I'm currently building and the brands I work with.
+        </p>
+      </div>
+      <div class="md:col-span-4">
+        <dl class="space-y-3 border-l-2 border-cream/40 pl-5">
+          <div>
+            <dt class="text-xs uppercase tracking-widest text-cream-deep/70">Categories</dt>
+            <dd class="font-display text-lg text-cream font-semibold mt-1">Photography · Client work · Personal projects</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </section>
+)}
+
+<!-- Project sections, each in its accent color -->
+{projects.map((project) => {
+  const photos = galleryFor(project.slug);
+  const theme = projectTheme[project.accent as keyof typeof projectTheme] ?? projectTheme.rose;
+  return (
+    <section
+      id={project.slug}
+      class:list={['section relative overflow-hidden', theme.bg, theme.text]}
+      data-animate
+    >
+      <span aria-hidden="true" class="absolute top-12 right-[7%] text-current opacity-40 text-3xl animate-spin-slow inline-block">✦</span>
+      <span aria-hidden="true" class="absolute bottom-20 left-[5%] text-current opacity-30 text-2xl animate-float">✺</span>
+
+      <div class="container-wide relative">
+        {showHero ? (
+          <div class="grid md:grid-cols-12 gap-10 mb-10">
+            <div class="md:col-span-5">
+              <div class="flex items-center gap-5 mb-4">
+                {project.logo && (
+                  project.logoRounded ? (
+                    <div class="block w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden shrink-0">
+                      <img
+                        src={project.logo}
+                        alt={`${project.title} logo`}
+                        class="w-full h-full object-cover object-top"
+                        style="transform: scale(1.0); transform-origin: top center;"
+                      />
+                    </div>
+                  ) : (
+                    <img
+                      src={project.logo}
+                      alt={`${project.title} logo`}
+                      class="block w-20 h-20 md:w-24 md:h-24 object-cover shrink-0"
+                    />
+                  )
+                )}
+                <div class="min-w-0">
+                  <p class:list={['eyebrow mb-2', theme.eyebrow]}>{project.category}</p>
+                  <h3 class:list={['font-display font-semibold text-4xl md:text-5xl lg:text-6xl leading-[1.05]', theme.text]}>{project.title}</h3>
+                </div>
+              </div>
+              <p class:list={['text-base mb-3', theme.emptyText]}>{project.role}</p>
+              <a
+                href={project.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                class:list={['arrow-link inline-flex items-center gap-2 text-base font-semibold underline-offset-4 hover:underline', theme.text]}
+              >
+                {project.handle}
+                <svg class="w-3 h-3 arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M3 8h10M9 4l4 4-4 4" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </a>
+            </div>
+            <div class="md:col-span-7 flex items-start">
+              <p class:list={['text-base md:text-lg leading-relaxed', theme.emptyText]}>{project.long}</p>
+            </div>
+          </div>
+        ) : (
+          <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 md:gap-10 mb-10">
+            <div class="flex items-center gap-5 min-w-0">
+              {project.logo && (
+                project.logoRounded ? (
+                  <div class="block w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden shrink-0">
+                    <img
+                      src={project.logo}
+                      alt={`${project.title} logo`}
+                      class="w-full h-full object-cover object-top"
+                      style="transform: scale(1.0); transform-origin: top center;"
+                    />
+                  </div>
+                ) : (
+                  <img
+                    src={project.logo}
+                    alt={`${project.title} logo`}
+                    class="block w-24 h-24 md:w-28 md:h-28 object-cover shrink-0"
+                  />
+                )
+              )}
+              <div class="min-w-0">
+                <p class:list={['eyebrow mb-4', theme.eyebrow]}>{project.category}</p>
+                <h3 class:list={['font-display font-semibold text-5xl md:text-6xl lg:text-7xl leading-[1.05]', theme.text]}>{project.title}</h3>
+              </div>
+            </div>
+            <div class="md:text-right shrink-0">
+              <p class:list={['text-base md:text-lg mb-3', theme.emptyText]}>{project.role}</p>
+              <a
+                href={project.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                class:list={['arrow-link inline-flex items-center gap-2 text-base font-semibold underline-offset-4 hover:underline', theme.text]}
+              >
+                {project.handle}
+                <svg class="w-3 h-3 arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M3 8h10M9 4l4 4-4 4" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        )}
+
+        {project.videos && project.videos.length > 1 ? (
+          <div class={videoGridClass}>
+            {project.videos.map((src) => (
+              <div class="relative aspect-[9/16] overflow-hidden rounded-xl bg-cocoa border border-cream-deep shadow-md group">
+                <video
+                  autoplay
+                  muted
+                  loop
+                  playsinline
+                  preload="metadata"
+                  data-hover-controls
+                  class="w-full h-full object-cover"
+                >
+                  <source src={src} type="video/mp4" />
+                </video>
+              </div>
+            ))}
+          </div>
+        ) : project.videos && project.videos.length === 1 ? (
+          <div class="flex justify-center">
+            <div class:list={['relative aspect-[9/16] overflow-hidden rounded-xl bg-cocoa border border-cream-deep shadow-md group', singleVideoWidthClass]}>
+              <video
+                autoplay
+                muted
+                loop
+                playsinline
+                preload="metadata"
+                data-hover-controls
+                class="w-full h-full object-cover"
+              >
+                <source src={project.videos[0]} type="video/mp4" />
+              </video>
+            </div>
+          </div>
+        ) : photos.length > 0 ? (
+          compactVideos ? (
+            <div class={videoGridClass}>
+              {photos.map((photo) => (
+                <a
+                  href={photo.src}
+                  data-lightbox={project.slug}
+                  class="relative aspect-[9/16] overflow-hidden rounded-xl bg-cocoa border border-cream-deep shadow-md group block"
+                >
+                  <img
+                    src={photo.src}
+                    alt={`${project.title} photograph`}
+                    loading="lazy"
+                    decoding="async"
+                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                  />
+                </a>
+              ))}
+            </div>
+          ) : (
+            <div class="columns-2 md:columns-3 lg:columns-4 gap-4 [&>a]:mb-4">
+              {photos.map((photo) => (
+                <a
+                  href={photo.src}
+                  data-lightbox={project.slug}
+                  class="block break-inside-avoid overflow-hidden rounded-xl bg-cream-deep group"
+                >
+                  <img
+                    src={photo.src}
+                    alt={`${project.title} photograph`}
+                    loading="lazy"
+                    decoding="async"
+                    class:list={[
+                      'w-full h-auto transition-transform duration-700 group-hover:scale-[1.03]',
+                      photo.aspect === 'tall' ? 'aspect-[2/3]' : photo.aspect === 'square' ? 'aspect-square' : 'aspect-[3/2]',
+                      'object-cover',
+                    ]}
+                  />
+                </a>
+              ))}
+            </div>
+          )
+        ) : (
+          <div class="rounded-2xl bg-cream/10 border border-dashed border-cream/40 p-10 md:p-14 text-center">
+            <p class:list={['font-display text-xl mb-2 font-semibold', theme.text]}>Photos live on Instagram for now</p>
+            <p class:list={['max-w-md mx-auto text-sm mb-6', theme.emptyText]}>
+              The full set of work for {project.title} is on {project.handle}.
+            </p>
+            <a
+              href={project.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="arrow-link inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-cream text-cocoa text-base font-medium hover:text-rose active:scale-[0.97] transition-all duration-200"
+            >
+              Browse {project.handle}
+              <svg class="w-4 h-4 arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </a>
+          </div>
+        )}
+      </div>
+    </section>
+  );
+})}
+
+<Lightbox />
+
+<script>
+  function initVideoHoverControls() {
+    const videos = document.querySelectorAll<HTMLVideoElement>('video[data-hover-controls]');
+    videos.forEach((video) => {
+      if ((video as any).__hoverInit) return;
+      (video as any).__hoverInit = true;
+      const container = video.parentElement;
+      if (!container) return;
+
+      container.addEventListener('mouseenter', () => { video.controls = true; });
+      container.addEventListener('mouseleave', () => { video.controls = false; });
+      container.addEventListener('touchstart', () => { video.controls = !video.controls; }, { passive: true });
+    });
+  }
+
+  initVideoHoverControls();
+  document.addEventListener('astro:after-swap', initVideoHoverControls);
+</script>

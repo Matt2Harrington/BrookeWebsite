@@ -1,0 +1,64 @@
+---
+import { site, navLinks } from '../../data/site';
+const year = new Date().getFullYear();
+---
+
+<footer class="bg-rose text-cream-deep border-t border-rose">
+  <div class="max-w-6xl mx-auto px-6 sm:px-10 py-14 grid gap-10 md:grid-cols-12">
+    <div class="md:col-span-5">
+      <p class="font-display text-2xl text-cream mb-3">{site.name}</p>
+      <p class="prose-warm text-cream-deep/85 max-w-sm text-sm">
+        {site.tagline}. Based in {site.location}. Available for projects worldwide.
+      </p>
+      <div class="mt-6">
+        <a href="/contact" class="arrow-link inline-flex items-center gap-2 px-5 py-2 rounded-full bg-cream text-cocoa text-sm font-medium hover:bg-mustard transition-colors">
+          Work With Me
+          <svg class="w-4 h-4 arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M3 8h10M9 4l4 4-4 4" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="md:col-span-3">
+      <p class="eyebrow text-mustard mb-4">Sitemap</p>
+      <ul class="space-y-2 text-sm">
+        <li><a href="/" class="hover:text-cream transition-colors">Home</a></li>
+        {navLinks.map(link => (
+          <li><a href={link.href} class="hover:text-cream transition-colors">{link.label}</a></li>
+        ))}
+      </ul>
+    </div>
+
+    <div class="md:col-span-4">
+      <p class="eyebrow text-mustard mb-4">Connect</p>
+      <ul class="space-y-2 text-sm">
+        <li>
+          <a href={site.instagram} target="_blank" rel="noopener noreferrer" class="hover:text-cream transition-colors">
+            Instagram &middot; {site.instagramHandle}
+          </a>
+        </li>
+        <li>
+          <a href={site.tiktok} target="_blank" rel="noopener noreferrer" class="hover:text-cream transition-colors">
+            TikTok &middot; {site.tiktokHandle}
+          </a>
+        </li>
+        <li>
+          <a href={`mailto:${site.email}`} class="hover:text-cream transition-colors">
+            Email &middot; {site.email}
+          </a>
+        </li>
+        <li class="text-cream-deep/70">
+          Location &middot; {site.location}
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-cream-deep/20">
+    <div class="max-w-6xl mx-auto px-6 sm:px-10 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-cream-deep/70">
+      <p>&copy; {year} {site.name}. All rights reserved.</p>
+      <p>{site.domain}</p>
+    </div>
+  </div>
+</footer>

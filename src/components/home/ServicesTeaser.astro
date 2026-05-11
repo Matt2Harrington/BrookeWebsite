@@ -1,0 +1,66 @@
+---
+import { services } from '../../data/services';
+
+const tilts = ['-rotate-1', 'rotate-0', 'rotate-1'];
+---
+
+<section class="section bg-teal text-cream relative overflow-hidden" data-animate>
+  <span aria-hidden="true" class="absolute top-12 right-[8%] text-mustard text-3xl animate-spin-slow inline-block">✦</span>
+  <span aria-hidden="true" class="absolute bottom-20 left-[6%] text-cream text-2xl animate-float">✺</span>
+  <span aria-hidden="true" class="absolute top-1/2 right-[3%] text-cream-deep text-xl animate-spin-reverse inline-block">✦</span>
+  <span aria-hidden="true" class="absolute top-32 left-[45%] w-2.5 h-2.5 rounded-full bg-mustard animate-float-slow"></span>
+  <span aria-hidden="true" class="absolute bottom-32 right-[40%] w-3 h-3 rounded-full bg-cream animate-float"></span>
+  <span aria-hidden="true" class="absolute top-24 left-[8%] w-2 h-2 rounded-full bg-cream-deep animate-float" style="animation-delay: 1.5s"></span>
+
+  <div class="container-wide relative">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 pb-6 border-b border-cream/30">
+      <div>
+        <p class="eyebrow text-cream mb-3">Services</p>
+        <h2 class="font-display font-semibold text-5xl md:text-6xl lg:text-7xl text-cream leading-[1.05]">
+          Three ways to <span class="marker is-mustard-soft">work together</span>
+        </h2>
+      </div>
+      <a href="/services" class="arrow-link text-sm text-cream-deep hover:text-mustard transition-colors inline-flex items-center gap-2">
+        See full breakdown
+        <svg class="w-3 h-3 arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M3 8h10M9 4l4 4-4 4" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </a>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-5" data-stagger>
+      {services.map((service, i) => (
+        <a
+          href={`/services#${service.slug}`}
+          class:list={[
+            'group bg-cream text-cocoa border border-cream-deep rounded-2xl p-7 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-xl',
+            tilts[i % tilts.length],
+          ]}
+        >
+          <div class="flex items-baseline justify-between mb-4">
+            <span class="text-xs text-cocoa-soft/70 tracking-widest">0{i + 1}</span>
+            <span class="text-xs text-rose tracking-widest uppercase">{service.startingAt}</span>
+          </div>
+          <h3 class="font-display text-2xl text-cocoa mb-3 group-hover:text-rose transition-colors font-semibold">
+            {service.title}
+          </h3>
+          <p class="prose-warm text-sm mb-5">{service.short}</p>
+          <ul class="text-sm text-cocoa-soft space-y-1.5 mb-6">
+            {service.bullets.map((bullet) => (
+              <li class="flex items-start gap-2">
+                <span class="mt-1.5 w-1 h-1 rounded-full bg-rose shrink-0"></span>
+                {bullet}
+              </li>
+            ))}
+          </ul>
+          <span class="mt-auto text-xs uppercase tracking-widest text-cocoa-soft group-hover:text-rose transition-colors inline-flex items-center gap-1 arrow-link">
+            Details
+            <svg class="w-3 h-3 arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M3 8h10M9 4l4 4-4 4" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </span>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

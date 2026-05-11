@@ -1,0 +1,118 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+
+const roles = [
+  {
+    company: 'Kava Konnection',
+    role: 'Marketing Manager',
+    dates: 'August 2025 – Present',
+    bullets: [
+      'Led and directed social media accounts by creating Instagram Reels and TikToks, taking professional photos, managing marketing events, and making flyers using Canva.',
+      'Collaborated with the management team to develop content strategies that increased engagement and brand awareness.',
+      'Utilized analytic tools to track performance metrics, analyzed audience insights, and optimized content strategy for maximum reach and impact.',
+    ],
+    instagram: site.clientInstagram,
+    handle: site.clientHandle,
+    bg: 'bg-cream',
+    text: 'text-cocoa',
+    eyebrow: 'text-rose',
+    soft: 'text-cocoa-soft',
+    accent: 'is-rose',
+  },
+  {
+    company: 'CCH Interiors',
+    role: 'Digital Creator Contractor',
+    dates: 'March – May 2025',
+    bullets: [
+      'Key contributor to online social media direction and presence.',
+      'Captured professional photos and videos of in-store home furniture showrooms for social media and marketing campaigns.',
+      'Created an online digital catalog of products in the showroom on Shopify.',
+    ],
+    instagram: null,
+    handle: null,
+    bg: 'bg-cream',
+    text: 'text-cocoa',
+    eyebrow: 'text-rose',
+    soft: 'text-cocoa-soft',
+    accent: 'is-rose',
+  },
+  {
+    company: 'Harrington & Hobbs Photography',
+    role: 'Photographer',
+    dates: 'January 2025 – Present',
+    bullets: [
+      'Weddings, portraits, events, branding shoots, restaurant menu rollouts, and more.',
+      'Editorial portrait, lifestyle, and travel photography for brands and individuals.',
+      'Full-service shoot management — from concept and prep to delivery of final edited files.',
+    ],
+    instagram: site.photographyInstagram,
+    handle: site.photographyHandle,
+    bg: 'bg-cream',
+    text: 'text-cocoa',
+    eyebrow: 'text-rose',
+    soft: 'text-cocoa-soft',
+    accent: 'is-rose',
+  },
+];
+---
+
+<BaseLayout title={`Experience — ${site.name}`}>
+  <!-- Hero (rose) -->
+  <section class="bg-rose text-cream border-b border-cocoa/20 relative overflow-hidden" data-animate>
+    <span aria-hidden="true" class="absolute top-20 right-[10%] text-mustard text-4xl animate-spin-slow inline-block">✦</span>
+    <span aria-hidden="true" class="absolute bottom-12 left-[8%] text-cream text-3xl animate-float">✦</span>
+    <span aria-hidden="true" class="absolute top-1/2 right-[4%] text-cream-deep text-2xl animate-spin-reverse inline-block">✺</span>
+    <span aria-hidden="true" class="absolute top-12 left-[40%] w-2 h-2 rounded-full bg-cream animate-float-slow"></span>
+    <span aria-hidden="true" class="absolute bottom-16 right-[28%] w-3 h-3 rounded-full bg-mustard animate-float"></span>
+
+    <div class="max-w-6xl mx-auto px-6 sm:px-10 pt-20 pb-16 md:pt-28 md:pb-20 relative">
+      <h1 class="font-display font-bold text-6xl sm:text-7xl md:text-8xl text-cream leading-[0.95] tracking-tight">
+        <span class="word-reveal inline-block" style="animation-delay: 100ms">Working</span>
+        <span class="word-reveal inline-block italic font-medium" style="animation-delay: 240ms">Experience</span>
+      </h1>
+    </div>
+  </section>
+
+  <!-- Roles -->
+  {roles.map((role, i) => (
+    <section class:list={['section relative overflow-hidden', role.bg, role.text]} data-animate>
+      <span aria-hidden="true" class="absolute top-12 right-[7%] text-current opacity-40 text-3xl animate-spin-slow inline-block">✦</span>
+      <span aria-hidden="true" class="absolute bottom-20 left-[5%] text-current opacity-30 text-2xl animate-float">✺</span>
+
+      <div class="container-wide relative">
+        <div class="grid md:grid-cols-12 gap-10">
+          <div class="md:col-span-5">
+            <h2 class:list={['font-display font-semibold text-4xl md:text-5xl lg:text-6xl leading-[1.05] mb-3', role.text]}>{role.company}</h2>
+            <p class:list={['font-display text-xl md:text-2xl mb-2', role.soft]}>
+              <span class={`marker ${role.accent}`}>{role.role}</span>
+            </p>
+            <p class:list={['text-sm uppercase tracking-widest', role.soft]}>{role.dates}</p>
+            {role.instagram && role.handle && (
+              <a
+                href={role.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                class:list={['arrow-link inline-flex items-center gap-2 text-sm font-semibold mt-5 underline-offset-4 hover:underline', role.text]}
+              >
+                {role.handle}
+                <svg class="w-3 h-3 arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M3 8h10M9 4l4 4-4 4" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </a>
+            )}
+          </div>
+          <ul class="md:col-span-7 space-y-3" data-stagger>
+            {role.bullets.map(bullet => (
+              <li class="flex items-start gap-3">
+                <span class:list={['mt-2 w-2 h-2 rounded-full shrink-0', role.soft.replace('text-', 'bg-').replace('/85', '')]} ></span>
+                <span class:list={['text-base md:text-lg leading-relaxed', role.soft]}>{bullet}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+  ))}
+
+</BaseLayout>

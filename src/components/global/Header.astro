@@ -1,0 +1,84 @@
+---
+import { navLinks, site } from '../../data/site';
+
+const currentPath = Astro.url.pathname;
+---
+
+<!-- Scroll progress bar -->
+<div
+  id="scroll-progress"
+  class="fixed top-0 left-0 h-1 z-50 transition-[width] duration-100 ease-out pointer-events-none"
+  style="width: 0%; background: linear-gradient(to right, #E8B71E 0%, #F87425 25%, #FAC4D0 50%, #2EA9A0 75%, #1F3A66 100%);"
+></div>
+
+<header
+  id="site-header"
+  class="sticky top-0 z-40 bg-rose text-cream backdrop-blur-md border-b border-cocoa/20 transition-[height,padding] duration-300 ease-out"
+>
+  <nav
+    class="max-w-6xl mx-auto px-6 sm:px-10 h-16 flex items-center justify-between transition-[height] duration-300"
+    aria-label="Main navigation"
+  >
+    <div class="flex items-center gap-8">
+      <a href="/" class="group inline-flex items-baseline gap-2 text-cream hover:text-cream transition-colors" aria-label="Home">
+        <span class="font-display text-lg tracking-tight whitespace-nowrap">{site.name}</span>
+        <span aria-hidden="true" class="text-mustard text-base inline-block group-hover:animate-spin-slow shrink-0">✦</span>
+      </a>
+
+      <div class="hidden md:flex items-center gap-6">
+        {navLinks.map(link => (
+          <a
+            href={link.href}
+            class:list={[
+              'nav-underline text-sm tracking-wide transition-colors hover:text-cream',
+              currentPath.startsWith(link.href) ? 'text-cream is-current' : 'text-cream-deep',
+            ]}
+          >
+            {link.label}
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <div class="hidden md:flex items-center gap-5">
+      <a
+        href={site.instagram}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="nav-underline text-xs uppercase tracking-widest text-cream-deep hover:text-cream transition-colors"
+      >
+        Instagram
+      </a>
+      <a
+        href={site.tiktok}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="nav-underline text-xs uppercase tracking-widest text-cream-deep hover:text-cream transition-colors"
+      >
+        TikTok
+      </a>
+    </div>
+
+    <button
+      id="mobile-menu-btn"
+      class="md:hidden p-2 text-cream hover:text-cream"
+      aria-label="Open menu"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+    >
+      <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 7h16M4 12h16M4 17h16" />
+      </svg>
+    </button>
+  </nav>
+</header>
+
+<style>
+  /* Scrolled state — header shrinks */
+  body.is-scrolled #site-header {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+  body.is-scrolled #site-header > nav {
+    height: 3.25rem;
+  }
+</style>

@@ -1,0 +1,9 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PortfolioContent from '../components/portfolio/PortfolioContent.astro';
+import { site } from '../data/site';
+---
+
+<BaseLayout title={`Portfolio — ${site.name}`}>
+  <PortfolioContent />
+</BaseLayout>
