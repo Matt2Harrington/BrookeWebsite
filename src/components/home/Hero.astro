@@ -1,4 +1,5 @@
 ---
+import { site } from '../../data/site';
 ---
 
 <section class="bg-rose text-cream border-b border-cocoa/20 relative overflow-hidden" data-animate>
@@ -24,17 +25,26 @@
         </span>
       </h1>
 
-      <p class="font-display text-2xl md:text-3xl text-cream-deep/90 mb-10 max-w-xl word-reveal" style="animation-delay: 520ms">
-        Photographer, marketing strategist &amp; content creator based in Greenville, SC.
+      <p class="font-display text-2xl md:text-3xl text-cream-deep/90 mb-8 max-w-xl word-reveal" style="animation-delay: 520ms">
+        Social Media Managing · Content Creation · Photographer
       </p>
 
-      <div class="flex flex-wrap items-center gap-5 word-reveal" style="animation-delay: 660ms">
-        <a href="/services" class="arrow-link inline-flex items-center justify-center gap-3 px-9 py-4 rounded-full bg-cream text-cocoa text-base font-medium tracking-wide hover:text-rose active:scale-[0.97] transition-all duration-200">
-          View services &amp; pricing
-          <svg class="w-4 h-4 arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
-            <path d="M3 8h10M9 4l4 4-4 4" stroke-linecap="round" stroke-linejoin="round" />
-          </svg>
+      <div class="flex flex-wrap items-center gap-x-6 gap-y-2 mb-10 text-sm word-reveal" style="animation-delay: 600ms">
+        <a href={`mailto:${site.email}`} class="text-cream-deep hover:text-mustard transition-colors arrow-link inline-flex items-center gap-1.5">
+          <svg class="w-4 h-4" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2.5 5h15v10h-15z" stroke-linejoin="round" /><path d="M2.5 6l7.5 5 7.5-5" stroke-linecap="round" stroke-linejoin="round" /></svg>
+          {site.email}
         </a>
+        <a href={site.instagram} target="_blank" rel="noopener noreferrer" class="text-cream-deep hover:text-mustard transition-colors arrow-link inline-flex items-center gap-1.5">
+          <svg class="w-4 h-4" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="14" height="14" rx="4" /><circle cx="10" cy="10" r="3.2" /><circle cx="14.5" cy="5.5" r="0.6" fill="currentColor" /></svg>
+          {site.instagramHandle}
+        </a>
+        <a href={site.tiktok} target="_blank" rel="noopener noreferrer" class="text-cream-deep hover:text-mustard transition-colors arrow-link inline-flex items-center gap-1.5">
+          <svg class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor"><path d="M14.5 2.5h-2.7v9.6a2.4 2.4 0 11-2.4-2.4v-2.6a5 5 0 105 5V8a6.4 6.4 0 003.7 1.2v-2.6a3.8 3.8 0 01-3.6-4.1z"/></svg>
+          {site.tiktokHandle}
+        </a>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-5 word-reveal" style="animation-delay: 720ms">
         <a href="/portfolio" class="arrow-link inline-flex items-center justify-center gap-3 px-9 py-4 rounded-full border-2 border-cream/50 text-cream text-base font-medium tracking-wide hover:bg-cream/10 hover:border-cream active:scale-[0.97] transition-all duration-200">
           See recent work
           <svg class="w-4 h-4 arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -56,22 +66,6 @@
             />
           </div>
           <p class="absolute bottom-3 left-0 right-0 text-center font-script text-cocoa text-2xl">brookelyn ✿</p>
-        </div>
-
-        <!-- Video reel layered on top of the photo (autoplays inline on iOS) -->
-        <div class="absolute -bottom-8 -left-6 md:-bottom-10 md:-left-10 z-10 -rotate-[7deg] w-28 md:w-36 aspect-[9/16] bg-cocoa border-[6px] border-cream rounded-sm overflow-hidden shadow-xl transition-transform duration-300 hover:rotate-0 hover:scale-[1.05]">
-          <video
-            autoplay
-            muted
-            loop
-            playsinline
-            preload="auto"
-            poster="/images/brooke.jpg"
-            class="w-full h-full object-cover"
-            aria-label="Brookelyn behind the scenes"
-          >
-            <source src="/videos/uploadNYCEmpire.mp4" type="video/mp4" />
-          </video>
         </div>
 
         <span aria-hidden="true" class="absolute -top-6 -right-4 text-mustard text-3xl animate-spin-slow inline-block">✦</span>

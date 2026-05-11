@@ -12,7 +12,7 @@ export default {
         // Cool slate for body / secondary text (no brown)
         'cocoa-soft': '#3D4350',
         // Bold raspberry — primary accent
-        rose: '#E62E55',
+        rose: '#4A1B20',
         'rose-soft': '#FAC4D0',
         // Chartreuse lime — secondary accent
         sage: '#8FB01C',

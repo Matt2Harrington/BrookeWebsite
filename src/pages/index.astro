@@ -1,22 +1,14 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/home/Hero.astro';
-import ServicesTeaser from '../components/home/ServicesTeaser.astro';
-import FeaturedWork from '../components/home/FeaturedWork.astro';
-import Process from '../components/home/Process.astro';
-import Testimonials from '../components/home/Testimonials.astro';
-import RecentPosts from '../components/home/RecentPosts.astro';
-import FAQTeaser from '../components/home/FAQTeaser.astro';
-import CTA from '../components/home/CTA.astro';
+import AboutMe from '../components/home/AboutMe.astro';
+import Toolbox from '../components/home/Toolbox.astro';
+import PortfolioContent from '../components/portfolio/PortfolioContent.astro';
 ---
 
 <BaseLayout>
   <Hero />
-  <ServicesTeaser />
-  <FeaturedWork />
-  <Process />
-  <Testimonials />
-  <RecentPosts />
-  <FAQTeaser />
-  <CTA />
+  <AboutMe />
+  <Toolbox />
+  <PortfolioContent showHero={false} compactVideos={true} />
 </BaseLayout>

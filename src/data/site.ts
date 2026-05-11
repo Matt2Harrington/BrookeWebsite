@@ -1,13 +1,17 @@
 export const site = {
   name: 'Brookelyn McPherson',
-  tagline: 'Photographer · Marketing Strategist · Content Creator',
+  tagline: 'Social Media Managing · Content Creation · Photographer',
   domain: 'galaxylens.art',
-  email: '[EDIT: hello@galaxylens.art]',
+  email: 'brookelynmcpherson@gmail.com',
   location: 'Greenville, SC',
 
   // Personal / brand IG (header + footer "find me" link)
   instagram: 'https://instagram.com/brookelyn_hobbs?utm_medium=copy_link',
   instagramHandle: '@brookelyn_hobbs',
+
+  // TikTok
+  tiktok: 'https://tiktok.com/@brookelynhobbs',
+  tiktokHandle: '@brookelynhobbs',
 
   // Photography business — all photography on the site links here
   photographyInstagram: 'https://instagram.com/harringtonandhobbs',
@@ -24,8 +28,7 @@ export const site = {
 
 export const navLinks = [
   { label: 'About', href: '/about' },
-  { label: 'Services', href: '/services' },
-  { label: 'Portfolio', href: '/portfolio' },
+  { label: 'Experience', href: '/experience' },
   { label: 'Contact', href: '/contact' },
 ];
 
