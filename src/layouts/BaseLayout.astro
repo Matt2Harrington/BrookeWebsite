@@ -15,8 +15,11 @@ interface Props {
 const {
   title = `${site.name} — ${site.tagline}`,
   description = `${site.name} — photographer, marketing strategist, and content creator helping brands turn ideas into impactful campaigns.`,
-  ogImage = '/images/camera.png',
+  ogImage = '/images/brooke2.jpeg',
 } = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
+const ogImageURL = new URL(ogImage, Astro.site).toString();
 ---
 
 <!DOCTYPE html>
@@ -27,10 +30,18 @@ const {
     <meta name="theme-color" content="#4A1B20" />
     <meta name="description" content={description} />
     <meta name="author" content={site.name} />
+    <link rel="canonical" href={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={ogImage} />
+    <meta property="og:image" content={ogImageURL} />
+    <meta property="og:image:alt" content={`${site.name} portrait`} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:site_name" content={site.name} />
     <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageURL} />
     <link rel="icon" href="/images/camera.png" type="image/png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
