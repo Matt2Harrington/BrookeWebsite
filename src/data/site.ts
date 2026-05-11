@@ -1,7 +1,7 @@
 export const site = {
   name: 'Brookelyn McPherson',
   tagline: 'Social Media Managing · Content Creation · Photographer',
-  domain: 'galaxylens.art',
+  domain: 'brookelynhobbs.com',
   email: 'brookelynmcpherson@gmail.com',
   location: 'Greenville, SC',
 
